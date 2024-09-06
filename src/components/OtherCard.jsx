@@ -26,7 +26,7 @@ function OtherCard({ title, image, firstColor, secondColor, balance,type }) {
                 <p className='font-sans text-white text-[14px] font-semibold'>{title}</p>
                 <div className='flex gap-[12px] h-auto items-center'>
                     <div className=''>
-                        <p className='font-sans text-white text-end leading-[21px]'>{balance.toLocaleString()} USD</p>
+                        <p className='font-sans text-white text-end leading-[21px]'>{balance} USD</p>
                         <p className='font-sans text-[12px] text-[#616A8B] text-end leading-[16px]'>{type}</p>
                     </div>
                     <div className="flex items-center h-[56px] w-[56px] rounded-full justify-center" style={{ background: `${secondColor}`, boxShadow: "0px 12px 10px 0px rgba(25, 11, 42, 0.25)" }}>
