@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react"
-import Button from '@mui/material/Button';
-import { useNavigate } from "react-router-dom"
 import Card from "../components/Card";
-import { Line } from 'react-chartjs-2';
 import Balance from "../components/Balance";
 import Speeding from "../components/Speeding";
 import MarketGraphic from "../components/MarketGraphic";
@@ -37,9 +34,6 @@ function Home() {
                         <p className="text-white font-sans text-[18px] font-medium">Overview</p>
                         <p className="text-[14px]" style={{ color: "rgba(84, 102, 156, 1)" }}>25 october, Sunday</p>
                     </div>
-                    <Button variant="contained" className="w-[125px] h-[32px] addwidget">
-                        Add Widget
-                    </Button>
                 </div>
                 <div className="flex justify-between flex-wrap gap-[16px]">
                     <Balance changes={false}></Balance>

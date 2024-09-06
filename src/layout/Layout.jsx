@@ -5,17 +5,20 @@ import { useLocation } from "react-router-dom";
 function Layout() {
     let [flag,setFlag] = useState(false)
     let location = useLocation()
-    const navigate = useNavigate()
+    let navigate = useNavigate()
     let user = localStorage.getItem('user')
-    useEffect(() => {
-        if (!user){
-            navigate("/login")
+    let [person,setPerson] = useState();
+    useEffect(()=>{
+        if (user) {
+            setPerson(JSON.parse(user))
+        }else{
+            navigate("/signin")
         }
-    }, [])
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        window.location.reload();
-      };
+    },[])
+    function logout(){
+        localStorage.removeItem('user')
+        window.location.reload()
+    }
     return (
         <>
             <div className="flex h-[100vh]">
@@ -49,10 +52,10 @@ function Layout() {
                     <div className="w-full">
                         <hr className="hr w-[171px] rounded m-auto max-[765px]:w-full" />
                         <div className="aside_part h-[46px]">
-                            <img src="/market.png" alt="" className="w-[22px] h-auto" style={{ border: "1px solid rgba(1, 143, 255, 1)", borderRadius: '50%' }} />
-                            <p className="font-sans text-[14px] text-white">Tilav</p>
+                            <img src="/userImage.png" alt="" className="w-[22px] h-auto" />
+                            <p className="font-sans text-[14px] text-white">{person?.name}</p>
                         </div>
-                        <div className="aside_part h-[46px]" onClick={handleLogout}>
+                        <div className="aside_part h-[46px]" onClick={logout}>
                             <img src="/logout.png" alt="" className="w-[16px] h-auto" />
                             <p className="font-sans text-[14px] text-white">Log out</p>
                         </div>

@@ -1,3 +1,41 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "ed5b",
+      "name": "tilav",
+      "surname": "123",
+      "email": "tilav@gmail.com",
+      "password": "tilav232007",
+      "wallets": [
+        {
+          "name": "Visa",
+          "balance": 10000,
+          "validity": "01/02",
+          "cardNumber": 1029384756102938,
+          "type": "Visa"
+        },
+        {
+          "name": "Master Card",
+          "balance": 5000,
+          "validity": "02/12",
+          "cardNumber": 1234596949596954,
+          "type": "MasterCard"
+        },
+        {
+          "name": "American Expres",
+          "balance": 1000,
+          "validity": "09/91",
+          "cardNumber": 1919191929394959,
+          "type": "American Express"
+        },
+        {
+          "name": "Discover",
+          "balance": 9000,
+          "validity": "12/23",
+          "cardNumber": 2949596070302040,
+          "type": "Discover"
+        }
+      ]
+    }
+  ]
 }

@@ -10,8 +10,8 @@ function Transiction() {
                     <div className="flex gap-[40px] items-center max-[520px]:flex-col max-[520px]:gap-[8px] max-[520px]:items-start">
                         <p className="text-white font-sans text-[18px] font-medium">Transictions</p>
                     </div>
-                    <Button variant="contained" className="w-[125px] h-[32px] addwidget">
-                        Add Widget
+                    <Button variant="contained" className="w-[145px] h-[32px] addwidget">
+                        Add Transiction
                     </Button>
                 </div>
                 <div className="flex justify-between mb-[13px]">

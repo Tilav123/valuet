@@ -14,8 +14,8 @@ function TransactionBlock({statement}) {
                 <p className="text-white text-[14px] font-sans w-full" style={{whitepace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>74EKRJMXkhKDR5dj34578fgirwE22sfg</p>
             </div>
             <div className="flex gap-[24px] items-center w-[40%] justify-end max-[1240px]:w-auto max-[1030px]:gap-[14px]">
-                <p className="text-white text-[14px] font-medium">0.0085 BTC</p>
-                <button className={`${statement === true ? "bg-[#00E8ACBF]" : statement === false ? "bg-[#F35050]" : "bg-[#32395E]"} text-white text-[14px] font-semibold rounded-[5px] w-[85px] h-[30px]`}>{statement === true ? "Completed" : statement === false ? "Error" : "Waiting"}</button>
+                <p className="text-white text-[14px] font-medium">0.0085 USD</p>
+                <button className={`${statement === true ? "bg-[#00E8ACBF]" : statement === false ? "bg-[#F35050]" : "bg-[#32395E]"} text-white text-[14px] font-semibold rounded-[5px] w-[85px] h-[30px]`}>{statement === true ? "Deposited" : statement === false ? "Withdrawn" : "Waiting"}</button>
             </div>
         </div>
     );

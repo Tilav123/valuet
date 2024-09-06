@@ -279,3 +279,6 @@ main {
   -ms-overflow-style: none; 
   scrollbar-width: none;
 }
+.error::after{
+  background-color: red;
+}

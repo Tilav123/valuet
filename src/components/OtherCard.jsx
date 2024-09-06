@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart, Line, ResponsiveContainer } from 'recharts';
-function OtherCard({ title, image, firstColor, secondColor }) {
+function OtherCard({ title, image, firstColor, secondColor, balance,type }) {
      let data = [
         { name: 'Point 1', value: 15 },
         { name: 'Point 2', value: 5 },
@@ -26,8 +26,8 @@ function OtherCard({ title, image, firstColor, secondColor }) {
                 <p className='font-sans text-white text-[14px] font-semibold'>{title}</p>
                 <div className='flex gap-[12px] h-auto items-center'>
                     <div className=''>
-                        <p className='font-sans text-white text-end leading-[21px]'>5 248 USD</p>
-                        <p className='font-sans text-[12px] text-[#616A8B] text-end leading-[16px]'>+2,59%</p>
+                        <p className='font-sans text-white text-end leading-[21px]'>{balance.toLocaleString()} USD</p>
+                        <p className='font-sans text-[12px] text-[#616A8B] text-end leading-[16px]'>{type}</p>
                     </div>
                     <div className="flex items-center h-[56px] w-[56px] rounded-full justify-center" style={{ background: `${secondColor}`, boxShadow: "0px 12px 10px 0px rgba(25, 11, 42, 0.25)" }}>
                         <div className="w-[44px] h-[44px] rounded-full flex items-center justify-center" style={{ background: firstColor }}>
