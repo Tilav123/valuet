@@ -1,16 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from '@mui/material/Button';
 import Balance from "../components/Balance";
 import OtherCard from "../components/OtherCard";
 import MarketGraphic from "../components/MarketGraphic";
 import RecentTransactions from "../ccontainers/RecentTransactions";
-
 function Wallets({ add }) {
     const carouselRef = useRef(null);
     const [isDragStart, setIsDragStart] = useState(false);
     const [prevPageX, setPrevPageX] = useState(0);
     const [prevScrollLeft, setPrevScrollLeft] = useState(0);
-
     const data = [
         { name: 'June', value: 4200 },
         { name: '', value: 2000 },
@@ -23,9 +21,7 @@ function Wallets({ add }) {
         { name: 'October', value: 2000 },
         { name: '', value: 8000 }
     ];
-
-    const tricks = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000];
-
+    const tricks = [0, 2000, 4000, 6000, 8000, 10000, 12000, 14000]
     const handleMouseDown = (e) => {
         setIsDragStart(true);
         setPrevPageX(e.pageX);
@@ -44,24 +40,20 @@ function Wallets({ add }) {
     const handleMouseUp = () => {
         setIsDragStart(false);
     };
-
-    const [formData, setFormData] = useState({
+    let [formData, setFormData] = useState({
         name: '',
         balance: '',
         validity: '',
         cardNumber: '',
         type: '',
     });
-
     const [errors, setErrors] = useState({});
+
     const cardTypes = ['Visa', 'MasterCard', 'American Express', 'Discover'];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: name === 'balance' || name === 'cardNumber' ? Number(value) : value,
-        });
+        setFormData({ ...formData, [name]: value });
     };
 
     const validate = () => {
@@ -91,17 +83,18 @@ function Wallets({ add }) {
         e.preventDefault();
         if (validate()) {
             console.log('Form data:', formData);
-            add(formData);
+            add(formData)
             onClose();
         }
     };
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const onOpen = () => setIsModalOpen(true);
-    const onClose = () => setIsModalOpen(false);
-
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-
+    const onOpen = () => {
+        setIsModalOpen(true);
+    };
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
+    let [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
     return (
         <>
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style={isModalOpen ? { display: "flex" } : { display: "none" }}>
@@ -146,7 +139,7 @@ function Wallets({ add }) {
                         <div className="mb-4">
                             <label className="block text-sm font-medium mb-1">Card Number</label>
                             <input
-                                type="number"
+                                type="text"
                                 name="cardNumber"
                                 value={formData.cardNumber}
                                 onChange={handleChange}
@@ -187,7 +180,6 @@ function Wallets({ add }) {
                     </form>
                 </div>
             </div>
-
             <div className="w-auto max-w-[1271px]">
                 <div className="flex justify-between items-center">
                     <p className="text-white font-sans text-[18px] font-medium mt-[28px] mb-[24px]">Wallets</p>
@@ -199,19 +191,56 @@ function Wallets({ add }) {
                     <Balance changes={true} />
                     <div
                         ref={carouselRef}
-                        className="flex-1 h-[354px] carousel max-[870px]:flex-none max-[870px]:w-full"
+                        className="flex-grow flex gap-[24.5px] overflow-x-auto whitespace-nowrap carousel justify-between"
                         onMouseDown={handleMouseDown}
                         onMouseMove={handleMouseMove}
                         onMouseUp={handleMouseUp}
-                        onMouseLeave={handleMouseUp}
                     >
-                        <OtherCard add={add} />
-                        <OtherCard add={add} />
-                        <OtherCard add={add} />
+                        {!user ? (
+                            <>
+                                <OtherCard title={"BitCoin"} image={"/bitCoin.png"} firstColor={"#604392"} secondColor={"#4D337F80"} balance={5245} type={"market"}/>
+                                <OtherCard title={"Ethereum"} image={"/ethereum.png"} firstColor={"#6162D6"} secondColor={"#4948A866"} balance={5245} type={"market"}/>
+                                <OtherCard title={"Dash"} image={"/dashLogo.png"} firstColor={"#72EB38"} secondColor={"#6CBA6080"} balance={5245} type={"market"}/>
+                            </>
+                        ) : (
+                            <>
+                                {user.wallets.map((wallet, index) => (
+                                    <OtherCard title={wallet.name} index={index} image={wallet.type === 'Visa' 
+                                        ? '/visaIcon.png'
+                                        : wallet.type === 'MasterCard'
+                                        ? '/mastercardIcon.png'
+                                        : wallet.type === 'American Express'
+                                        ? '/americanExpressIcon.png'
+                                        : wallet.type === 'Discover'
+                                        ? '/discoverIcon.png'
+                                        : ''} firstColor={wallet.type === 'Visa' 
+                                            ? '#6162D6'
+                                            : wallet.type === 'MasterCard'
+                                            ? '#8A8A8A'
+                                            : wallet.type === 'American Express'
+                                            ? '#006CC9'
+                                            : wallet.type === 'Discover'
+                                            ? '#006CC9'
+                                            : ''} secondColor={wallet.type === 'Visa' 
+                                                ? '#4948A866'
+                                                : wallet.type === 'MasterCard'
+                                                ? '#626262'
+                                                : wallet.type === 'American Express'
+                                                ? '#014988'
+                                                : wallet.type === 'Discover'
+                                                ? '#232342'
+                                                : ''} type={wallet.type} balance={wallet.balance}></OtherCard>
+                                ))}
+                            </>
+                        )
+                        }
+
                     </div>
                 </div>
-                <MarketGraphic data={data} tricks={tricks} />
-                <RecentTransactions user={user} />
+                <div className="flex justify-between mt-[24px] gap-[16px] max-[1064px]:flex-wrap">
+                    <MarketGraphic data={data} max={8200} tricks={tricks} width={"552px"} height={"399px"} topblock={false} fontSize={"14px"} left={-10}></MarketGraphic>
+                    <RecentTransactions></RecentTransactions>
+                </div>
             </div>
         </>
     );
