@@ -38,7 +38,7 @@ function Speeding() {
     };
 
     return (
-        <div className="w-[240px] min-w-[240px] h-[312px] rounded-xl py-4 flex flex-col max-[1346px]:w-[49%] max-[1064px]:flex-grow" style={{ background: "linear-gradient(180deg, rgba(27, 18, 78, 0.2) 0%, #0F0B38 93.37%)" }}>
+        <div className="w-[240px] min-w-[240px] min-h-[312px] h-auto rounded-xl py-4 flex flex-col max-[1346px]:w-[49%] max-[1064px]:flex-grow" style={{ background: "linear-gradient(180deg, rgba(27, 18, 78, 0.2) 0%, #0F0B38 93.37%)" }}>
             <div className="flex justify-between px-4">
                 <h3 className="text-[14px] text-white font-semibold font-sans">Spending</h3>
                 <p className="text-white text-sm font-extralight flex items-center gap-[4px]">January <img src="/arrow.png" alt="" className="w-[6px] h-[3px]" /></p>

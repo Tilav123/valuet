@@ -4,7 +4,7 @@ import Balance from "../components/Balance";
 import OtherCard from "../components/OtherCard";
 import MarketGraphic from "../components/MarketGraphic";
 import RecentTransactions from "../ccontainers/RecentTransactions";
-function Wallets({ add }) {
+function Wallets({ add,user }) {
     const carouselRef = useRef(null);
     const [isDragStart, setIsDragStart] = useState(false);
     const [prevPageX, setPrevPageX] = useState(0);
@@ -46,6 +46,7 @@ function Wallets({ add }) {
         validity: '',
         cardNumber: '',
         type: '',
+        transictions: []
     });
     const [errors, setErrors] = useState({});
 
@@ -94,7 +95,6 @@ function Wallets({ add }) {
     const onClose = () => {
         setIsModalOpen(false);
     };
-    let [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
     return (
         <>
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style={isModalOpen ? { display: "flex" } : { display: "none" }}>
@@ -188,7 +188,7 @@ function Wallets({ add }) {
                     </Button>
                 </div>
                 <div className="flex gap-[16px] max-[870px]:flex-wrap">
-                    <Balance changes={true} />
+                    <Balance changes={true} user={user}/>
                     <div
                         ref={carouselRef}
                         className="flex-grow flex gap-[24.5px] overflow-x-auto whitespace-nowrap carousel justify-between"
@@ -198,9 +198,9 @@ function Wallets({ add }) {
                     >
                         {!user ? (
                             <>
-                                <OtherCard title={"BitCoin"} image={"/bitCoin.png"} firstColor={"#604392"} secondColor={"#4D337F80"} balance={5245} type={"market"}/>
-                                <OtherCard title={"Ethereum"} image={"/ethereum.png"} firstColor={"#6162D6"} secondColor={"#4948A866"} balance={5245} type={"market"}/>
-                                <OtherCard title={"Dash"} image={"/dashLogo.png"} firstColor={"#72EB38"} secondColor={"#6CBA6080"} balance={5245} type={"market"}/>
+                                <OtherCard title={"BitCoin"} image={"/bitCoin.png"} firstColor={"#604392"} secondColor={"#4D337F80"} balance={5245} type={"market"} validaty={"01/01"}/>
+                                <OtherCard title={"Ethereum"} image={"/ethereum.png"} firstColor={"#6162D6"} secondColor={"#4948A866"} balance={5245} type={"market"} validaty={"01/01"}/>
+                                <OtherCard title={"Dash"} image={"/dashLogo.png"} firstColor={"#72EB38"} secondColor={"#6CBA6080"} balance={5245} type={"market"} validaty={"01/01"}/>
                             </>
                         ) : (
                             <>
@@ -229,7 +229,7 @@ function Wallets({ add }) {
                                                 ? '#014988'
                                                 : wallet.type === 'Discover'
                                                 ? '#232342'
-                                                : ''} type={wallet.type} balance={wallet.balance}></OtherCard>
+                                                : ''} type={wallet.type} balance={wallet.balance} validaty={wallet.validity} transictions={wallet.transictions}></OtherCard>
                                 ))}
                             </>
                         )
@@ -239,7 +239,7 @@ function Wallets({ add }) {
                 </div>
                 <div className="flex justify-between mt-[24px] gap-[16px] max-[1064px]:flex-wrap">
                     <MarketGraphic data={data} max={8200} tricks={tricks} width={"552px"} height={"399px"} topblock={false} fontSize={"14px"} left={-10}></MarketGraphic>
-                    <RecentTransactions></RecentTransactions>
+                    <RecentTransactions user={user}></RecentTransactions>
                 </div>
             </div>
         </>

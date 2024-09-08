@@ -6,7 +6,7 @@ import MarketGraphic from "../components/MarketGraphic";
 import RecentNews from "../components/RecentNews";
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend);
-function Home() {
+function Home({user}) {
     const data = [
         { name: 'Nov 15', value: 4200 },
         { name: '', value: 2000 },
@@ -36,7 +36,7 @@ function Home() {
                     </div>
                 </div>
                 <div className="flex justify-between flex-wrap gap-[16px]">
-                    <Balance changes={false}></Balance>
+                    <Balance changes={false} user={user}></Balance>
                     <Speeding></Speeding>
                     <div className="flex gap-[16px] flex-wrap w-[584px] max-[1345px]:w-full max-[1345px]:justify-between">
                         <Card title={"BitCoin"} image={"/bitCoin.png"} currency={"btc"} firstColor={"#604392"} secondColor={"#4D337F80"}></Card>

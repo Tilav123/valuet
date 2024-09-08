@@ -6,15 +6,15 @@ function Layout() {
     let [flag,setFlag] = useState(false)
     let location = useLocation()
     let navigate = useNavigate()
-    let user = localStorage.getItem('user')
     let [person,setPerson] = useState();
+    let [user,setUser] = useState(localStorage.getItem('user'))
     useEffect(()=>{
         if (user) {
             setPerson(JSON.parse(user))
         }else{
             navigate("/signin")
         }
-    },[])
+    },[user,navigate])
     function logout(){
         localStorage.removeItem('user')
         window.location.reload()
